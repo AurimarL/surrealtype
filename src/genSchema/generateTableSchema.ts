@@ -40,7 +40,12 @@ const createIndexFile = async (directory: string, files: string[]): Promise<void
 	await fs.writeFile(resolve(directory, 'index.ts'), indexContent)
 }
 
-export const generateTableSchema = async (outFolder: string, generatedFolder: string, tableInfo: Record<string, string>): Promise<void> => {
+export const generateTableSchema = async (
+	outFolder: string,
+	generatedFolder: string,
+	outputSchemaFolderName: string,
+	tableInfo: Record<string, string>,
+): Promise<void> => {
 	try {
 		await mkdirp(outFolder)
 
@@ -86,7 +91,8 @@ export ${outputFields};
 
 			generatedFiles.push(`${tableName}/${toCamelCase(tableName)}SchemaGen.ts`)
 
-			const schemaFolder = resolve(outFolder, 'schema', tableName)
+			const schemaFolder = resolve(outFolder, outputSchemaFolderName, tableName)
+
 			await mkdirp(schemaFolder)
 
 			const schemaFileName = `${toCamelCase(tableName)}Schema.ts`
@@ -152,7 +158,7 @@ export type ${toUpperCamelCase(tableName)} = z.output<typeof ${tableName}Schema>
 			}
 		}
 
-		const mainSchemaFolder = resolve(outFolder, 'schema')
+		const mainSchemaFolder = resolve(outFolder, outputSchemaFolderName)
 		const mainIndexFileName = resolve(mainSchemaFolder, 'index.ts')
 		const mainIndexContent = Object.keys(tableInfo)
 			.map(name => `export * from './${toCamelCase(name)}/index.js';`)

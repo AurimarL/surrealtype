@@ -9,6 +9,8 @@ export const configFileSchema = z.object({
 	password: z.string().default('root'),
 	outputFolder: z.string().default('client_generated'),
 	outputGenFolder: z.string().default('__generated'),
+	outputClientFolderName: z.string().default('client'),
+	outputSchemaFolderName: z.string().default('schema'),
 	generateClient: z.boolean().default(true),
 	surrealImage: z.string().default('surrealdb/surrealdb:latest'),
 })

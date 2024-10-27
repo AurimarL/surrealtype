@@ -7,5 +7,7 @@
 	"db": "my_database",
 	"outputFolder": "./out",
 	"outputGenFolder": "__generated",
-	"generateClient": true
+	"generateClient": true,
+	"outputClientFolderName": "client",
+	"outputSchemaFolderName": "schema"
 }
