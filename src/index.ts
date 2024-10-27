@@ -15,7 +15,7 @@ const main = async () => {
 	program
 		.name('surql-gen')
 		.description('Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.')
-		.version('1.0.3')
+		.version('1.0.4')
 
 	// Grouping connection options
 	program
