@@ -12,33 +12,57 @@ import { generateTableSchema } from './genSchema/generateTableSchema.js'
 import { printSorry } from './helper/printSorry.js'
 
 const main = async () => {
-    program
-        .name('surql-gen')
-        .description('Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.')
-        .version('1.0.3');
+	program
+		.name('surql-gen')
+		.description('Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.')
+		.version('1.0.3')
 
-    // Grouping connection options
-    program
-        .option('-s, --surreal [schema]', 'SurrealDB connection URL (default: http://localhost:8000)', 'http://localhost:8000')
-        .option('-u, --username [username]', 'Authentication username (default: root)', 'root')
-        .option('-p, --password [password]', 'Authentication password (default: root)', 'root')
-        .option('-n, --ns [namespace]', 'Namespace to use (default: test)', 'test')
-        .option('-d, --db [database]', 'Database to connect to (default: test)', 'test');
+	// Grouping connection options
+	program
+		.option(
+			'-s, --surreal [schema]',
+			'SurrealDB connection URL (default: http://localhost:8000)',
+			'http://localhost:8000',
+		)
+		.option('-u, --username [username]', 'Authentication username (default: root)', 'root')
+		.option('-p, --password [password]', 'Authentication password (default: root)', 'root')
+		.option('-n, --ns [namespace]', 'Namespace to use (default: test)', 'test')
+		.option('-d, --db [database]', 'Database to connect to (default: test)', 'test')
 
-    // Grouping file options
-    program
-        .option('-f, --schemaFile [schemaFile]', 'Path to a SurrealQL file containing the definitions')
-        .option('-c, --config [config]', 'Path to the config file (default: surql-gen.json)', 'surql-gen.json')
-        .option('-o, --outputFolder [outputFolder]', 'Output folder for generated files (default: client_generated)', 'client_generated')
-        .option('-og, --outputGenFolder [outputGenFolder]', 'Output folder for generated files (default: _generated)', '_generated')
-		.option('-oc, --outputClientFolderName [outputClientFolderName]', 'Output folder name for client files (default: client)', 'client')
-        .option('-os, --outputSchemaFolderName [outputSchemaFolderName]', 'Output folder name for schema files (default: schema)', 'schema')
+	// Grouping file options
+	program
+		.option('-f, --schemaFile [schemaFile]', 'Path to a SurrealQL file containing the definitions')
+		.option('-c, --config [config]', 'Path to the config file (default: surql-gen.json)', 'surql-gen.json')
+		.option(
+			'-o, --outputFolder [outputFolder]',
+			'Output folder for generated files (default: client_generated)',
+			'client_generated',
+		)
+		.option(
+			'-og, --outputGenFolder [outputGenFolder]',
+			'Output folder for generated files (default: _generated)',
+			'_generated',
+		)
+		.option(
+			'-oc, --outputClientFolderName [outputClientFolderName]',
+			'Output folder name for client files (default: client)',
+			'client',
+		)
+		.option(
+			'-os, --outputSchemaFolderName [outputSchemaFolderName]',
+			'Output folder name for schema files (default: schema)',
+			'schema',
+		)
 		.option('-g, --generateClient', 'Generate client code', true)
-        .option('--no-generateClient', 'Disable client code generation')
-        .option('-i, --surrealImage [surrealImage]', 'SurrealDB Docker image (default: surrealdb/surrealdb:latest)', 'surrealdb/surrealdb:latest');
+		.option('--no-generateClient', 'Disable client code generation')
+		.option(
+			'-i, --surrealImage [surrealImage]',
+			'SurrealDB Docker image (default: surrealdb/surrealdb:latest)',
+			'surrealdb/surrealdb:latest',
+		)
 
-    // Parse the command line arguments
-    program.parse(process.argv);
+	// Parse the command line arguments
+	program.parse(process.argv)
 
 	const options = program.opts()
 	const __dirname = process.cwd()
