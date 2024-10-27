@@ -31,19 +31,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: pnpm
 
       - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
+        id: pnpm-install
+        run: pnpm install --frozen-lockfile
 
       - name: Run Biome
         run: biome ci .
 
       - name: Test
-        id: npm-ci-test
-        run: npm test
+        id: pnpm-test
+        run: pnpm test
 
       - name: Build
-        id: npm-ci-build
-        run: npm run build
+        id: pnpm-build
+        run: pnpm run build
