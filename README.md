@@ -63,27 +63,41 @@ Configuring options for this tool is flexible and convenient. You have two main 
 And the best part? You can use both methods simultaneously if it suits your needs. In such cases, the tool intelligently merges the parameters, giving priority to the ones provided through the CLI.
 This means you have complete control over your configuration, adapting it to your preferences effortlessly.
 
-```bash
-Usage: surql-gen [options]
+# Usage: surql-gen [options]
 
-Generate zod schema and typescript client code from running Surreal database
+Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.
 
-Options:
-  -V, --version         output the version number
-  -f, --schemaFile      a SurrealQL file containing the definitions (default: myschema.surql)
-  -c, --config           config file (default: surql-gen.json)
-  -s, --surreal         SurrealDB connection url (default: http://localhost:8000)
-  -u, --username        auth username (default: root)
-  -p, --password        auth password (default: root)
-  -n, --ns              the namspace (default: test)
-  -d, --db              the database (default: test)
-  -o, --outputFolder    output folder (default: client_generated)
-  -g, --generateClient  generate client (default: true)
-  --no-generateClient   no client generation
-  -i, --surrealImage    SurrealDB docker image (default: surrealdb/surrealdb:latest)
-  
-  -h, --help            display help for command
-```
+## Options:
+
+- `-V, --version`  Output the version number.
+
+- `-f, --schemaFile [file]`  Path to a SurrealQL file containing the definitions (default: `myschema.surql`).
+
+- `-c, --config [file]`  Path to the config file (default: `surql-gen.json`).
+
+- `-s, --surreal [url]`  SurrealDB connection URL (default: `http://localhost:8000`).
+
+- `-u, --username [username]`   Authentication username (default: `root`).
+
+- `-p, --password [password]`  Authentication password (default: `root`).
+
+- `-n, --ns [namespace]`  Namespace to use (default: `test`).
+
+- `-d, --db [database]`  Database to connect to (default: `test`).
+
+- `-o, --outputFolder [folder]`  Output folder for generated files (default: `client_generated`).
+
+- `-oc, --outputClientFolderName [folder]`  Output folder name for client files (default: `client`).
+
+- `-os, --outputSchemaFolderName [folder]`  Output folder name for schema files (default: `schema`).
+
+- `-g, --generateClient`  Generate client code (default: `true`).
+
+- `--no-generateClient`  Disable client code generation.
+
+- `-i, --surrealImage [image]` SurrealDB Docker image (default: `surrealdb/surrealdb:latest`).
+
+- `-h, --help`  Display help for the command.
 
 ## Config file
 
@@ -94,17 +108,19 @@ Example:
 
 ```json
 {
-  "schemaFile": "schema.surql",
-  "surreal": "memory",
-  "username": "root",
-  "password": "secret_password",
-  "ns": "my_namespace",
-  "db": "my_database",
-  "outputFolder": "./out",
-  "generateClient": true,
-  "lib": "surrealdb",
+ 	"schemaFile": "schema.surql",
+	"surreal": "memory",
+	"username": "root",
+	"password": "secret_password",
+	"ns": "my_namespace",
+	"db": "my_database",
+	"outputFolder": "./out",
+	"outputGenFolder": "__generated",
+	"outputClientFolderName": "client",
+	"outputSchemaFolderName": "schema",
+	"generateClient": true,
   "surrealImage": "surrealdb/surrealdb:latest"
-  
+
 }
 ```
 
@@ -190,7 +206,11 @@ This design allows you to tailor the generated code to your project's specific r
 If you like this tool, I please you, to give a star ⭐️ on github:
 👉  [https://github.com/sebastianwessel/surrealdb-client-generator](https://github.com/sebastianwessel/surrealdb-client-generator)
 
+and
+
+👉  [https://github.com/aurimarl/surrealdb-client-generator](https://github.com/sebastianwessel/surrealdb-client-generator)
+
 If you run into an issue, please let me know so it can get fixed.
-👉  [https://github.com/sebastianwessel/surrealdb-client-generator/issues](https://github.com/sebastianwessel/surrealdb-client-generator/issues)
+👉  [https://github.com/aurimarl/surrealdb-client-generator/issues](https://github.com/sebastianwessel/surrealdb-client-generator/issues)
 
 **Good luck with your project. 👋 Cheers, and happy coding!**
