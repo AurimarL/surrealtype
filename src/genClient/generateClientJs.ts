@@ -11,6 +11,7 @@ import { getCreateEntityFileContent } from './getCreateEntityFileContent.js'
 import { getDeleteEntityFileContent } from './getDeleteEntityFileContent.js'
 import { getRepositoryContent } from './getRepositoryFileContent.js'
 import { getUpdateEntityFileContent } from './getUpdateEntityFileContent.js'
+import { getCreateManyEntityFileContent } from './getCreateManyEntityFileContent.js'
 
 const createIndexFile = (directory: string, files: string[]) => {
 	const indexContent = files
@@ -52,6 +53,10 @@ export const generateClientJs = async (
 			{
 				fileName: `create${tableNameFirstUpper}.ts`,
 				content: () => getCreateEntityFileContent(lib, tableName, outputSchemaFolderName, name),
+			},
+			{
+				fileName: `createMany${tableNameFirstUpper}.ts`,
+				content: () => getCreateManyEntityFileContent(lib, tableName, outputSchemaFolderName, name),
 			},
 			{
 				fileName: `update${tableNameFirstUpper}.ts`,
