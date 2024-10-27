@@ -6,5 +6,8 @@
 	"ns": "my_namespace",
 	"db": "my_database",
 	"outputFolder": "./out",
-	"generateClient": true
+	"outputGenFolder": "__generated",
+	"generateClient": true,
+	"outputClientFolderName": "client",
+	"outputSchemaFolderName": "schema"
 }

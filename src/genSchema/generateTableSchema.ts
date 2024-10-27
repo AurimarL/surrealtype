@@ -40,11 +40,16 @@ const createIndexFile = async (directory: string, files: string[]): Promise<void
 	await fs.writeFile(resolve(directory, 'index.ts'), indexContent)
 }
 
-export const generateTableSchema = async (outFolder: string, tableInfo: Record<string, string>): Promise<void> => {
+export const generateTableSchema = async (
+	outFolder: string,
+	generatedFolder: string,
+	outputSchemaFolderName: string,
+	tableInfo: Record<string, string>,
+): Promise<void> => {
 	try {
 		await mkdirp(outFolder)
 
-		const genSchemaFolder = resolve(outFolder, '_generated')
+		const genSchemaFolder = resolve(outFolder, generatedFolder)
 
 		console.log('Generating schema in', genSchemaFolder)
 
@@ -86,7 +91,8 @@ export ${outputFields};
 
 			generatedFiles.push(`${tableName}/${toCamelCase(tableName)}SchemaGen.ts`)
 
-			const schemaFolder = resolve(outFolder, 'schema', tableName)
+			const schemaFolder = resolve(outFolder, outputSchemaFolderName, tableName)
+
 			await mkdirp(schemaFolder)
 
 			const schemaFileName = `${toCamelCase(tableName)}Schema.ts`
@@ -97,8 +103,8 @@ export ${outputFields};
 
 import { z } from "zod";
 
-import { ${tableName}InputSchemaGen, ${tableName}OutputSchemaGen } from "../../_generated/index.js";
-import { recordId } from "../../_generated/recordSchema.js";
+import { ${tableName}InputSchemaGen, ${tableName}OutputSchemaGen } from "../../${generatedFolder}/index.js";
+import { recordId } from "../../${generatedFolder}/recordSchema.js";
 
 // payload schema for creating a new ${name} entity
 export const ${tableName}CreateSchema = ${tableName}InputSchemaGen.merge(z.object({
@@ -152,7 +158,7 @@ export type ${toUpperCamelCase(tableName)} = z.output<typeof ${tableName}Schema>
 			}
 		}
 
-		const mainSchemaFolder = resolve(outFolder, 'schema')
+		const mainSchemaFolder = resolve(outFolder, outputSchemaFolderName)
 		const mainIndexFileName = resolve(mainSchemaFolder, 'index.ts')
 		const mainIndexContent = Object.keys(tableInfo)
 			.map(name => `export * from './${toCamelCase(name)}/index.js';`)
@@ -163,9 +169,9 @@ export type ${toUpperCamelCase(tableName)} = z.output<typeof ${tableName}Schema>
 		const genIndexFileName = resolve(genSchemaFolder, 'index.ts')
 		if (!(await fs.stat(genIndexFileName).catch(() => false))) {
 			await createIndexFile(genSchemaFolder, generatedFiles)
-			console.log(' ✅ Created _generated/index.ts')
+			console.log(`✅ Created ${generatedFolder}/index.ts`)
 		} else {
-			console.log(' ❎ _generated/index.ts already exists')
+			console.log(`❎ ${generatedFolder}/index.ts already exists`)
 		}
 	} catch (error) {
 		console.error('An error occurred during schema generation:', error)

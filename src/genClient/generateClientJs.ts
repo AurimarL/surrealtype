@@ -23,8 +23,14 @@ const createIndexFile = (directory: string, files: string[]) => {
 	writeFileSync(resolve(directory, 'index.ts'), indexContent)
 }
 
-export const generateClientJs = async (outputFolder: string, tableNames: string[], lib: string) => {
-	const clientFolder = resolve(outputFolder, 'client')
+export const generateClientJs = async (
+	outputFolder: string,
+	outputClientFolderName: string,
+	outputSchemaFolderName: string,
+	tableNames: string[],
+	lib: string,
+) => {
+	const clientFolder = resolve(outputFolder, outputClientFolderName)
 	await mkdirp(clientFolder)
 
 	const generatedFiles: string[] = []
@@ -45,23 +51,23 @@ export const generateClientJs = async (outputFolder: string, tableNames: string[
 			},
 			{
 				fileName: `create${tableNameFirstUpper}.ts`,
-				content: () => getCreateEntityFileContent(lib, tableName, name),
+				content: () => getCreateEntityFileContent(lib, tableName, outputSchemaFolderName, name),
 			},
 			{
 				fileName: `update${tableNameFirstUpper}.ts`,
-				content: () => getUpdateEntityFileContent(lib, tableName),
+				content: () => getUpdateEntityFileContent(lib, tableName, outputSchemaFolderName),
 			},
 			{
 				fileName: `delete${tableNameFirstUpper}.ts`,
-				content: () => getDeleteEntityFileContent(lib, tableName),
+				content: () => getDeleteEntityFileContent(lib, tableName, outputSchemaFolderName),
 			},
 			{
 				fileName: `getAll${tableNameFirstUpper}s.ts`,
-				content: () => getAllEntityFileContent(lib, tableName, name),
+				content: () => getAllEntityFileContent(lib, tableName, name, outputSchemaFolderName),
 			},
 			{
 				fileName: `get${tableNameFirstUpper}ById.ts`,
-				content: () => getByIdEntityFileContent(lib, tableName),
+				content: () => getByIdEntityFileContent(lib, tableName, outputSchemaFolderName),
 			},
 		]
 
