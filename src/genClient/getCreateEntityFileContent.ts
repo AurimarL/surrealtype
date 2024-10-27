@@ -8,14 +8,13 @@ export const getCreateEntityFileContent = (
 ) => {
 	const entitySchemaName = `${entityName}CreateSchema`
 	const entityNameFirstUpper = `${toUpperCamelCase(entityName)}`
-	const entityTypeName = `${toUpperCamelCase(entityName)}`
 	const entityCreateTypeName = `${toUpperCamelCase(entityName)}Create`
 
 	return `
 import type { Surreal } from "${lib}";
 
 import { ${entitySchemaName} } from "../../${outputSchemaFolderName}/${entityName}/${entityName}Schema.js";
-import type { ${entityTypeName}, ${entityCreateTypeName} } from "../../${outputSchemaFolderName}/${entityName}/${entityName}Types.js";
+import type { ${entityCreateTypeName} } from "../../${outputSchemaFolderName}/${entityName}/${entityName}Types.js";
 
 export const create${entityNameFirstUpper} = async function (db: Surreal, ${entityName}: ${entityCreateTypeName}) {
   const payload = ${entitySchemaName}.parse(${entityName});
