@@ -8,10 +8,10 @@ import { toUpperCamelCase } from '../helper/toUpperCamelCase.js'
 import { getAllEntityFileContent } from './getAllEntityFileContent.js'
 import { getByIdEntityFileContent } from './getByIdEntityFileContent.js'
 import { getCreateEntityFileContent } from './getCreateEntityFileContent.js'
+import { getCreateManyEntityFileContent } from './getCreateManyEntityFileContent.js'
 import { getDeleteEntityFileContent } from './getDeleteEntityFileContent.js'
 import { getRepositoryContent } from './getRepositoryFileContent.js'
 import { getUpdateEntityFileContent } from './getUpdateEntityFileContent.js'
-import { getCreateManyEntityFileContent } from './getCreateManyEntityFileContent.js'
 
 const createIndexFile = (directory: string, files: string[]) => {
 	const indexContent = files

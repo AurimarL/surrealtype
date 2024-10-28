@@ -1,5 +1,5 @@
 {
-	"name": "@aurimarl/surql-gen",
+	"name": "surrealtype",
 	"private": false,
 	"version": "1.0.5",
 	"engines": {

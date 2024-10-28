@@ -13,9 +13,9 @@ import { printSorry } from './helper/printSorry.js'
 
 const main = async () => {
 	program
-		.name('surql-gen')
+		.name('surrealtype')
 		.description('Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.')
-		.version('1.0.4')
+		.version('1.0.5')
 
 	// Grouping connection options
 	program
