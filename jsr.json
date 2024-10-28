@@ -1,6 +1,6 @@
 {
 	"$schema": "https://jsr.io/schema/config-file.v1.json",
-	"name": "surrealtype",
+	"name": "@aurimar/surrealtype",
 	"description": "A small tool which generates a typescript client for SurrealDB based on the schema of a given database",
 	"version": "1.0.5",
 	"exports": "./dist/index.js",
