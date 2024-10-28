@@ -1,9 +1,9 @@
 {
-	"name": "surql-gen",
+	"name": "@aurimarl/surql-gen",
 	"private": false,
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"engines": {
-		"node": ">=18"
+		"node": ">=20"
 	},
 	"description": "A small tool which generates a typescript client for SurrealDB based on the schema of a given database",
 	"keywords": ["typescript", "surrealdb", "client", "javascript", "zod", "orm", "database", "generator", "tool"],
