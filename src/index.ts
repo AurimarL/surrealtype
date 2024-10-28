@@ -15,7 +15,7 @@ const main = async () => {
 	program
 		.name('surrealtype')
 		.description('Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.')
-		.version('1.0.5')
+		.version('1.0.6')
 
 	// Grouping connection options
 	program
@@ -32,7 +32,7 @@ const main = async () => {
 	// Grouping file options
 	program
 		.option('-f, --schemaFile [schemaFile]', 'Path to a SurrealQL file containing the definitions')
-		.option('-c, --config [config]', 'Path to the config file (default: surql-gen.json)', 'surql-gen.json')
+		.option('-c, --config [config]', 'Path to the config file (default: surrealtype.json)', 'surrealtype.json')
 		.option(
 			'-o, --outputFolder [outputFolder]',
 			'Output folder for generated files (default: client_generated)',
@@ -68,10 +68,10 @@ const main = async () => {
 	const __dirname = process.cwd()
 
 	if (!options.config) {
-		console.log('No config file specified - looking for surql-gen.json in current folder')
+		console.log('No config file specified - looking for surrealtype.json in current folder')
 	}
 
-	const configFilePath = resolve(__dirname, options.config || 'surql-gen.json')
+	const configFilePath = resolve(__dirname, options.config || 'surrealtype.json')
 
 	let fileContent: Record<string, unknown> = {}
 	try {
@@ -79,7 +79,7 @@ const main = async () => {
 		fileContent = JSON.parse(content.toString())
 	} catch (error) {
 		const err = error as Error & { code?: string }
-		if (options.config !== 'surql-gen.json' && err.code === 'ENOENT') {
+		if (options.config !== 'surrealtype.json' && err.code === 'ENOENT') {
 			console.error('Unable to find config file', configFilePath)
 			process.exit(1)
 		}

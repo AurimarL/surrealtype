@@ -94,4 +94,4 @@ client_generated/
 dist
 playground.ts
 out
-surql-gen.json
+surrealtype.json

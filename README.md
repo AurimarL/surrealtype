@@ -41,16 +41,16 @@ It's designed to make your life easier when working with these powerful technolo
 You can directly execute the generation:
 
 ```bash
-npx surql-gen
+npx surrealtype
 ```
 
 Or you can install the generator as dependency into your project.
 
 ```bash
-npm i -D @sebastianwessel/surql-gen
+npm i -D surrealtype
 ```
 
-In case you install the generator as dependency or you installed it globally, you can call directly `surql-gen`
+In case you install the generator as dependency or you installed it globally, you can call directly `surrealtype`
 
 ## How to Use
 
@@ -63,7 +63,7 @@ Configuring options for this tool is flexible and convenient. You have two main 
 And the best part? You can use both methods simultaneously if it suits your needs. In such cases, the tool intelligently merges the parameters, giving priority to the ones provided through the CLI.
 This means you have complete control over your configuration, adapting it to your preferences effortlessly.
 
-# Usage: surql-gen [options]
+# Usage: surrealtype [options]
 
 Generate Zod schema and TypeScript client code from a running SurrealDB instance or a schema file.
 
@@ -73,7 +73,7 @@ Generate Zod schema and TypeScript client code from a running SurrealDB instance
 
 - `-f, --schemaFile [file]`  Path to a SurrealQL file containing the definitions (default: `myschema.surql`).
 
-- `-c, --config [file]`  Path to the config file (default: `surql-gen.json`).
+- `-c, --config [file]`  Path to the config file (default: `surrealtype.json`).
 
 - `-s, --surreal [url]`  SurrealDB connection URL (default: `http://localhost:8000`).
 
@@ -129,7 +129,7 @@ Example:
 
 To use a schema file either provide the -f flag:
 ```bash
-surql-gen -f ./path/to/your/schema.surql
+surrealtype -f ./path/to/your/schema.surql
  ```
 
 or you can specify the path in the config file:
